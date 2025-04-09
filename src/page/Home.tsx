@@ -1,6 +1,10 @@
 const Home = () => {
   return (
-    <div>I'm Home form ./page/Home.tsx I'm displayed by outlet in App.tsx</div>
+    <>
+      <div className="bg-blue-500 text-white p-6 rounded-lg shadow-lg">
+        HOME PAGE 🎉
+      </div>
+    </>
   )
 }
 
