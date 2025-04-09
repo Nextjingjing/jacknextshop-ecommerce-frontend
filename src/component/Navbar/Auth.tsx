@@ -64,7 +64,7 @@ const AlreadyLogin = () => {
         </Menu>
     )
 }
-export const Profile = () => {
+export const Auth = () => {
     const user = useSelector((state: RootState) => state.user);
   
     return user.isLogin ? (

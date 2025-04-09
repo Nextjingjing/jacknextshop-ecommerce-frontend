@@ -10,9 +10,10 @@ import {
   ShoppingCartIcon,
 } from '@heroicons/react/24/outline'
 import { Link, useLocation } from 'react-router-dom'
-import logo from '../assets/logo.svg'
+import { Auth } from './Navbar/Auth'
+import { Navigation } from './Navbar/Navigation'
 import navigation from '../constants/navigation'
-import { Profile } from './Navbar/Profile'
+import { Logo } from './Navbar/Logo'
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
@@ -28,29 +29,10 @@ const NavBar = () => {
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
             <div className="flex h-16 items-center justify-between">
               {/* Left: Logo + Brand */}
-              <div className="flex items-center space-x-2">
-                <img src={logo} alt="Logo" className="h-10 w-auto" />
-                <span className="text-white text-xl font-bold">Jack & Next</span>
-              </div>
+              <Logo/>
 
               {/* Center: Navigation */}
-              <div className="hidden sm:flex space-x-4">
-                {navigation.map((item) => (
-                  <Link
-                    key={item.name}
-                    to={item.href}
-                    className={classNames(
-                      location.pathname === item.href
-                        ? 'bg-gray-900 text-white'
-                        : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                      'rounded-md px-3 py-2 text-sm font-medium'
-                    )}
-                    aria-current={location.pathname === item.href ? 'page' : undefined}
-                  >
-                    {item.name}
-                  </Link>
-                ))}
-              </div>
+              <Navigation/>
 
               {/* Right: Icons */}
               <div className="flex items-center space-x-4">
@@ -73,7 +55,7 @@ const NavBar = () => {
                 </button>
 
                 {/* Profile Dropdown */}
-                <Profile/>
+                <Auth/>
 
                 {/* Mobile menu button */}
                 <div className="sm:hidden">
