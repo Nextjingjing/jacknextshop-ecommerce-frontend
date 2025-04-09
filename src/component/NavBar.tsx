@@ -7,13 +7,14 @@ import {
   Bars3Icon,
   BellIcon,
   XMarkIcon,
-  ShoppingCartIcon,
 } from '@heroicons/react/24/outline'
 import { Link, useLocation } from 'react-router-dom'
 import { Auth } from './Navbar/Auth'
 import { Navigation } from './Navbar/Navigation'
 import navigation from '../constants/navigation'
 import { Logo } from './Navbar/Logo'
+import CartBtn from './Navbar/CartBtn'
+import NotificationBtn from './Navbar/NotificationBtn'
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
@@ -37,22 +38,10 @@ const NavBar = () => {
               {/* Right: Icons */}
               <div className="flex items-center space-x-4">
                 {/* Notification */}
-                <button
-                  type="button"
-                  className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                >
-                  <span className="sr-only">View notifications</span>
-                  <BellIcon className="h-6 w-6" aria-hidden="true" />
-                </button>
+                <NotificationBtn/>
 
                 {/* Cart */}
-                <button
-                  type="button"
-                  className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                >
-                  <span className="sr-only">View cart</span>
-                  <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
-                </button>
+                <CartBtn/>
 
                 {/* Profile Dropdown */}
                 <Auth/>

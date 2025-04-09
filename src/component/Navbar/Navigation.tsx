@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom'
-import navigation from '../../constants/navigation'
+import { navigationForNavBar } from '../../constants/navigation'
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
@@ -10,7 +10,7 @@ export const Navigation = () => {
 
   return (
     <div className="hidden sm:flex space-x-4">
-      {navigation.map((item) => (
+      {navigationForNavBar.map((item) => (
         <Link
           key={item.name}
           to={item.href}

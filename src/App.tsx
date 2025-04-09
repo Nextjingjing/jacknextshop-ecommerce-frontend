@@ -5,6 +5,7 @@ const App = () => {
   return (
     <div>
       <NavBar/>
+      {/* pages're displayed here */}
       <Outlet />
     </div>
   );
