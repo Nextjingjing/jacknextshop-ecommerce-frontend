@@ -4,6 +4,8 @@ import {
     MenuItem,
     MenuItems,
 } from '@headlessui/react'
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
 
 function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
@@ -63,7 +65,14 @@ const AlreadyLogin = () => {
     )
 }
 export const Profile = () => {
-    return (
-        <AlreadyLogin/>
-    )
-}
+    const user = useSelector((state: RootState) => state.user);
+  
+    return user.isLogin ? (
+      <AlreadyLogin />
+    ) : (
+      <button className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+        Sign In / Sign Up
+      </button>
+    );
+  };
+  

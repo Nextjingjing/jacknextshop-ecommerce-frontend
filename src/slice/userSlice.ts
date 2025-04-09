@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  fname: "test",
-  lname: "test",
-  profile: "test"
+  isLogin: false,
+  fname: "",
+  lname: "",
+  profile: ""
 };
 
 const userSlice = createSlice({
