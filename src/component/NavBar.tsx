@@ -8,12 +8,12 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline'
 import { Link, useLocation } from 'react-router-dom'
-import { Auth } from './navbar/Auth'
-import { Navigation } from './navbar/Navigation'
+import { Auth } from './NavBar/Auth'
+import { Navigation } from './NavBar/Navigation'
 import navigation from '../constants/navigation'
-import { Logo } from './navbar/Logo'
-import CartBtn from './navbar/CartBtn'
-import NotificationBtn from './navbar/NotificationBtn'
+import { Logo } from './NavBar/Logo'
+import CartBtn from './NavBar/CartBtn'
+import NotificationBtn from './NavBar/NotificationBtn'
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
