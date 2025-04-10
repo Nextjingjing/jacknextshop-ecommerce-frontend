@@ -7,7 +7,7 @@ type ComponentProp = {
 function Image({ product_image }: ComponentProp) {
     return (
         <div>
-            <img src={product_image} alt="" />
+            <img src={product_image} alt="" width={300} height={300} className='object-cover w-full h-64'/>
         </div>
     )
 }
