@@ -4,7 +4,7 @@ import App from './App.tsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from './store/store.ts';
-import "./styles/index.css"
+import './index.css'
 
 import navigationForRouter from './constants/navigation.tsx';
 
