@@ -1,5 +1,3 @@
-import React from 'react'
-
 type ComponentProp = {
     product_image: string
 }

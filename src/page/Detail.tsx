@@ -1,4 +1,3 @@
-import React from 'react'
 import Image from '../component/detail/Image'
 import Details from '../component/detail/Details'
 
