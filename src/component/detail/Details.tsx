@@ -1,7 +1,7 @@
 import React from 'react'
 
 interface ComponentProps {
-    product_name: string, 
+    product_name: string,
     product_price: number,
     product_rating: number,
     reviewer_count: number,
