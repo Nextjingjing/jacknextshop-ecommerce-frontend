@@ -12,6 +12,12 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
+    - name: Download dist artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: dist-folder
+        path: dist
+
     - name: Setup SSH
       run: |
         mkdir -p ~/.ssh
