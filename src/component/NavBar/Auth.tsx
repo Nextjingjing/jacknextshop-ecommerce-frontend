@@ -6,10 +6,16 @@ import {
 } from '@headlessui/react'
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
+import { API_BASE } from '../../constants/api';
 
 function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
 }
+
+const handleLogin = () => {
+    window.location.href = `${API_BASE}/login`;
+}
+
 const AlreadyLogin = () => {
     return(
         <Menu as="div" className="relative">
@@ -70,9 +76,8 @@ export const Auth = () => {
     return user.isLogin ? (
       <AlreadyLogin />
     ) : (
-      <button className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+      <button className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-blue-600" onClick={handleLogin}>
         Sign In / Sign Up
       </button>
     );
-  };
-  
+}
