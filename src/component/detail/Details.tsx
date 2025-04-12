@@ -1,6 +1,5 @@
 import React from 'react'
-import Quantity from './Quantity'
-import BuyAndAddCartButton from './BuyAndAddCartButton'
+import StarReview from './StarReview'
 
 interface ComponentProps {
     product_name: string,
@@ -22,15 +21,13 @@ const Details: React.FC<ComponentProps> = ({
             <div>
                 <div className='leading-loose'>
                     <h2 className='text-lg font-bold'>ชื่อสินค้า: {product_name}</h2>
-                    <p className='text'>คะเเนน: {product_rating} | จำนวนผู้รีวิว: {reviewer_count}</p>
+                    <div className='flex gap-2'>
+                        <p className='text'>คะเเนน: {product_rating}</p>
+                        <StarReview rating={product_rating} /> |
+                        <p>จำนวนผู้รีวิว: {reviewer_count}</p>
+                    </div>
                     <p className='text-lg font-bold text-red-500'>ราคา: {product_price} บาท</p>
                     <p>รายละเอียดสินค้า: {product_detail}</p>
-                </div>
-                <div className='fixed bottom-[385px] left-[569px]'>
-                    <Quantity product_stock={10} />
-                </div>
-                <div className='fixed bottom-[325px] left-[569px]'>
-                    <BuyAndAddCartButton />
                 </div>
             </div>
         </div>

@@ -28,14 +28,14 @@ const Quantity: React.FC<ComponentProp> = ({ product_stock }) => {
                 <div className='flex border-[1px] border-black w-fit rounded-md'>
                     <span
                         onClick={handleDecreaseQuantity}
-                        className='bg-gray-300 px-2 py-[2px] rounded-l-md cursor-pointer'
+                        className='bg-gray-200 px-2 py-[2px] rounded-l-md cursor-pointer'
                     >
                         <FontAwesomeIcon icon={faMinus} />
                     </span>
                     <span className='px-3 py-[2px] text-center'>{quantity}</span>
                     <span
                         onClick={handleIncreaseQuantity}
-                        className='bg-gray-300 px-2 py-[2px] rounded-r-md cursor-pointer'
+                        className='bg-gray-200 px-2 py-[2px] rounded-r-md cursor-pointer'
                     >
                         <FontAwesomeIcon icon={faPlus} />
                     </span>
