@@ -1,8 +1,6 @@
-name: Node.js CI & Deploy
+name: Node.js
 
 on:
-  push:
-    branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
 
@@ -28,20 +26,3 @@ jobs:
 
     - name: Build project
       run: npm run build --if-present
-
-    - name: Setup SSH
-      run: |
-        mkdir -p ~/.ssh
-        echo "${{ secrets.DEPLOY_KEY }}" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan -H ${{ secrets.DEPLOY_HOST }} >> ~/.ssh/known_hosts
-    
-    - name: Echo test to Windows (CMD)
-      run: |
-        ssh ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }} "echo Hello from CMD && dir C:\Users\${{ secrets.DEPLOY_USER }}\Desktop"
-
-
-
-    - name: Deploy dist folder to Windows via SCP
-      run: |
-        scp -r ./dist/* ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:"C:/Users/${{ secrets.DEPLOY_USER }}/Desktop/nginx/html"

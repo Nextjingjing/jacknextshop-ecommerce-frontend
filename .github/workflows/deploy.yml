@@ -1,0 +1,40 @@
+name: Build and Deploy to Windows
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 22.x
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Build project
+      run: npm run build
+
+    - name: Setup SSH
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.DEPLOY_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H ${{ secrets.DEPLOY_HOST }} >> ~/.ssh/known_hosts
+
+    - name: Echo test to Windows (CMD)
+      run: |
+        ssh ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }} "echo Hello from CMD && dir C:\Users\${{ secrets.DEPLOY_USER }}\Desktop"
+
+    - name: Deploy dist folder to Windows via SCP
+      run: |
+        scp -r ./dist/* ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:"C:/Users/${{ secrets.DEPLOY_USER }}/Desktop/nginx/html"
