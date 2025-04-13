@@ -4,9 +4,11 @@ import {
     MenuItem,
     MenuItems,
 } from '@headlessui/react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import { API_BASE } from '../../constants/api';
+import axios from 'axios';
+import { resetUser } from '../../slice/userSlice';
 
 function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
@@ -17,12 +19,34 @@ const handleLogin = () => {
 }
 
 const AlreadyLogin = () => {
-    return(
+    const dispatch = useDispatch();
+    const { image } = useSelector((state: RootState) => state.user);
+
+    const logout = async () => {
+        try {
+          await axios.post('http://localhost:8080/logout', {}, {
+            withCredentials: true,
+          });
+          dispatch(resetUser());
+        } catch (error: unknown) {
+          if (axios.isAxiosError(error)) {
+            if (error.response?.status === 401) {
+              console.log('Fail to logout.');
+              dispatch(resetUser());
+            } else {
+              console.log('Axios error during logout:', error.message);
+            }
+          } else {
+            console.log('Unexpected error during logout:', error);
+          }
+        }
+      };
+    return (
         <Menu as="div" className="relative">
             <MenuButton className="flex rounded-full bg-gray-800 text-sm focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                 <img
                     className="h-8 w-8 rounded-full"
-                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e"
+                    src={ image }
                     alt="Profile"
                 />
             </MenuButton>
@@ -55,29 +79,30 @@ const AlreadyLogin = () => {
                 </MenuItem>
                 <MenuItem>
                     {({ active }) => (
-                        <a
-                            href="#"
+                        <button
+                            onClick={logout}
                             className={classNames(
                                 active ? 'bg-gray-100' : '',
-                                'block px-4 py-2 text-sm text-gray-700'
+                                'block w-full text-left px-4 py-2 text-sm text-gray-700'
                             )}
                         >
                             Sign out
-                        </a>
+                        </button>
                     )}
                 </MenuItem>
+
             </MenuItems>
         </Menu>
     )
 }
 export const Auth = () => {
     const user = useSelector((state: RootState) => state.user);
-  
+
     return user.isLogin ? (
-      <AlreadyLogin />
+        <AlreadyLogin />
     ) : (
-      <button className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-blue-600" onClick={handleLogin}>
-        Sign In / Sign Up
-      </button>
+        <button className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-blue-600" onClick={handleLogin}>
+            Sign In / Sign Up
+        </button>
     );
 }

@@ -14,6 +14,11 @@ import { Navigation } from './NavBar/Navigation'
 import NotificationBtn from './NavBar/NotificationBtn'
 import CartBtn from './NavBar/CartBtn'
 import { Auth } from './NavBar/Auth'
+import { useDispatch } from 'react-redux'
+import { useEffect } from 'react'
+import axios from 'axios'
+import { API_BASE } from '../constants/api'
+import { setUser } from '../slice/userSlice'
 
 
 function classNames(...classes: string[]) {
@@ -21,7 +26,33 @@ function classNames(...classes: string[]) {
 }
 
 const NavBar = () => {
-  const location = useLocation()
+  const dispatch = useDispatch();
+  const location = useLocation();
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await axios.get(`${API_BASE}/api/user/`, {
+          withCredentials: true,
+        });
+        const { userId, fname, lname, image } = response.data.data;
+        
+        dispatch(setUser({ userId, fname, lname, image }));
+      } catch (error: unknown) {
+        if (axios.isAxiosError(error)) {
+          if (error.response?.status === 401) {
+            console.log('User is not authenticated');
+          } else {
+            console.log('Axios error:', error.message);
+          }
+        } else {
+          console.log('Unexpected error:', error);
+        }
+      }
+    };
+  
+    fetchUser();
+  }, [dispatch]);
 
   return (
     <Disclosure as="nav" className="bg-[#0C0950]">
