@@ -5,7 +5,9 @@ const initialState = {
   userId: null,
   fname: "",
   lname: "",
-  image: ""
+  image: "",
+  birthdate: "",
+  email: "",
 };
 
 const userSlice = createSlice({
@@ -18,6 +20,8 @@ const userSlice = createSlice({
       if (action.payload.fname !== undefined) state.fname = action.payload.fname;
       if (action.payload.lname !== undefined) state.lname = action.payload.lname;
       if (action.payload.image !== undefined) state.image = action.payload.image;
+      if (action.payload.birthdate !== undefined) state.birthdate = action.payload.birthdate;
+      if (action.payload.email !== undefined) state.email = action.payload.email;
 
     },
     resetUser: () => initialState,

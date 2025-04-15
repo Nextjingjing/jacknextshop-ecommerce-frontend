@@ -35,9 +35,8 @@ const NavBar = () => {
         const response = await axios.get(`${API_BASE}/api/user`, {
           withCredentials: true,
         });
-        const { userId, fname, lname, image } = response.data.data;
-        
-        dispatch(setUser({ userId, fname, lname, image }));
+        const { userId, fname, lname, image, birthdate, email } = response.data.data;
+        dispatch(setUser({ userId, fname, lname, image, birthdate, email }));
       } catch (error: unknown) {
         if (axios.isAxiosError(error)) {
           if (error.response?.status === 401) {

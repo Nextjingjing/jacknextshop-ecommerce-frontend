@@ -3,6 +3,7 @@ import About from "../page/About";
 import Cart from "../page/Cart";
 import Notification from "../page/Notification";
 import Detail from "../page/Detail";
+import Profile from "../page/Profile";
 
 const navigationForRouter = [
   { name: "หน้าแรก", href: "/", element: <Home /> },
@@ -10,6 +11,7 @@ const navigationForRouter = [
   { name: "ตระกร้า", href: "/cart/:userId", element: <Cart /> },
   { name: "แจ้งเตือน", href: "/notification/:userId", element: <Notification /> },
   { name: "รายละเอียดสินค้า", href: "/product/:productId", element: <Detail /> },
+  { name: "โปรไฟล์", href: "/profile", element: <Profile /> },
 ];
 
 const navigationForNavBar = [
