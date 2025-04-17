@@ -25,7 +25,7 @@ const AlreadyLogin = () => {
 
     const logout = async () => {
         try {
-            await axios.post('http://localhost:8080/logout', {}, {
+            await axios.post(`{API_BASE}/logout`, {}, {
                 withCredentials: true,
             });
             dispatch(resetUser());
