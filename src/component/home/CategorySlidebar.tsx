@@ -7,7 +7,7 @@ type Category = {
     name: string;
   };
   
-  export default function CategorySlidebar() {
+  export default function CategorySlideBar() {
     const [categories, setCategories] = useState<Category[]>([]);
     useEffect(() => {
       const fetchCategories = async () => {
