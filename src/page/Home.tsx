@@ -1,5 +1,6 @@
 import BestSeller from '../component/home/BestSeller'
 import CategorySlidebar from '../component/home/CategorySlidebar'
+import Pagination from '../component/home/Pagination';
 import { ProductCard } from '../component/home/ProductCard';
 import SearchBar from '../component/SearchBar'
 
@@ -77,25 +78,31 @@ const Home = () => {
   return (
     <>
       <SearchBar />
-      <div className="w-full px-4 py-6">
+      <div className="w-full px-4 py-4">
         <BestSeller />
-        <div className="text-3xl sm:text-2xl lg:text-2xl font-bold text-blue-800 mb-4 text-left bg-blue-50 border border-blue-300 w-full px-4 py-2 rounded">
-          กรองหมวดหมู่สินค้า
-        </div>
-        <div className="flex justify-center">
-          <CategorySlidebar />
+        <div className=' w-full px-4 py-2 '>
+          <div className="text-3xl sm:text-2xl lg:text-2xl font-bold text-blue-800 mb-4 text-left">
+            กรองหมวดหมู่สินค้า
+          </div>
+          <div className="flex justify-center">
+            <CategorySlidebar />
+          </div>
         </div>
       </div>
       <div className="flex justify-center">
-        <div className="px-4 py-6">
+        <div className="px-4 py-3">
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
             {products.map(product => (
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
         </div>
-
       </div>
+      {/* Pagination */}
+      <div className="flex justify-center pb-4">
+        <Pagination totalPages={10} />
+      </div>
+
     </>
   )
 }

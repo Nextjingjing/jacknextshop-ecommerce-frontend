@@ -11,7 +11,7 @@ type Product = {
   
   export const ProductCard = ({ product }: ProductProps) => {
     return (
-      <div className="p-4 border-b-amber-50 rounded shadow text-center">
+      <div className="p-4 border-b-amber-50 bg-white rounded shadow text-center">
         <img src={product.image} alt={product.name} className="w-full h-[175px] object-contain mb-2" />
         <p className="font-bold">{product.name}</p>
         <p className="text-red-600">฿{product.price.toLocaleString()}</p>
