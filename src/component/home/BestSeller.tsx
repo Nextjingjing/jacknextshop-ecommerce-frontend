@@ -44,7 +44,7 @@ const BestSeller = () => {
   return (
     <div className="px-4 py-6 bg-blue-50">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-2xl font-bold text-blue-800">KILLER DEAL</h2>
+        <h2 className="text-2xl font-bold text-blue-800">Best Seller</h2>
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
