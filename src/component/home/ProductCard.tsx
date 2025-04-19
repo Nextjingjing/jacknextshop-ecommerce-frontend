@@ -15,10 +15,10 @@ type Product = {
     const navigation = useNavigate()
     return (
       <div 
-      className="p-4 border-b-amber-50 bg-white rounded shadow text-center"
+      className="p-4 border-b-amber-50 w-[20rem] h-[20rem] cursor-pointer bg-white rounded shadow text-center"
       onClick={() => {navigation(`/product/${product.productId}`)}}
       >
-        <img src={product.image} alt={product.name} className="w-full h-[175px] object-contain mb-2" />
+        <img src={product.image} alt={product.name} className="w-full max-w-[20rem] h-[225px] object-contain mb-2" />
         <p className="font-bold">{product.name}</p>
         <p className="text-red-600">฿{product.price.toLocaleString()}</p>
       </div>
