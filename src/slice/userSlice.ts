@@ -6,7 +6,7 @@ const initialState = {
   fname: "",
   lname: "",
   image: "",
-  birthdate: "",
+  birthDate: "",
   email: "",
 };
 
@@ -20,7 +20,7 @@ const userSlice = createSlice({
       if (action.payload.fname !== undefined) state.fname = action.payload.fname;
       if (action.payload.lname !== undefined) state.lname = action.payload.lname;
       if (action.payload.image !== undefined) state.image = action.payload.image;
-      if (action.payload.birthdate !== undefined) state.birthdate = action.payload.birthdate;
+      if (action.payload.birthDate !== undefined) state.birthDate = action.payload.birthDate;
       if (action.payload.email !== undefined) state.email = action.payload.email;
 
     },

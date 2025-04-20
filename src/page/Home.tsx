@@ -20,11 +20,19 @@ const Home = () => {
   const [totalPages, setTotalPages] = useState<number>(1);
   const [searchParams] = useSearchParams();
   const pageParam = searchParams.get('page');
-  const page = pageParam ? parseInt(pageParam, 10) - 1 : 0;
+  const page: number = pageParam ? parseInt(pageParam, 10) - 1 : 0;
+  const categoryIdParam = searchParams.get('categoryId');
+  const categoryId: number | null = categoryIdParam ? parseInt(categoryIdParam, 10) : null
+  
   useEffect(() =>{
     const fetchProducts = async () =>{
       try{
-        const response = await axios.get(`${API_BASE}/api/product?size=10&page=${page}`);
+        let response;
+        if(categoryId !== null){
+          response = await axios.get(`${API_BASE}/api/product?size=10&page=${page}&categoryId=${categoryId}`);
+        }else{
+          response = await axios.get(`${API_BASE}/api/product?size=10&page=${page}`);
+        }
         setTotalPages(response.data.totalPages);
         setProducts(response.data.data);
       }catch(error){
@@ -32,7 +40,7 @@ const Home = () => {
       }
     }
     fetchProducts();
-  },[pageParam, totalPages])
+  },[pageParam, categoryIdParam])
   return (
     <>
       <SearchBar />
