@@ -15,7 +15,7 @@ function Profile() {
     fname: '',
     lname: '',
     email: '',
-    birthdate: '',
+    birthDate: '',
   });
 
   useEffect(() => {
@@ -23,7 +23,7 @@ function Profile() {
       fname: user.fname,
       lname: user.lname,
       email: user.email,
-      birthdate: user.birthdate,
+      birthDate: user.birthDate,
     });
   }, [user]);
 
@@ -45,7 +45,7 @@ function Profile() {
     formData.append('fname', form.fname);
     formData.append('lname', form.lname);
     formData.append('email', form.email);
-    formData.append('birthdate', form.birthdate);
+    formData.append('birthDate', form.birthDate);
     if (file) {
       formData.append('image', file);
     }
@@ -113,7 +113,7 @@ function Profile() {
           <input
             type="date"
             name="birthdate"
-            value={form.birthdate}
+            value={form.birthDate}
             onChange={handleInputChange}
             className="w-full border border-gray-300 rounded-lg px-4 py-2"
           />

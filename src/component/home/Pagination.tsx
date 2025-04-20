@@ -11,7 +11,9 @@ const Pagination: React.FC<PaginationProps> = ({ totalPages }) => {
 
   const handlePageChange = (page: number) => {
     if (page >= 1 && page <= totalPages) {
-      navigate(`?page=${page}`);
+      const params = new URLSearchParams(searchParams);
+      params.set("page", String(page));
+      navigate(`?${params.toString()}`)
     }
   };
 
