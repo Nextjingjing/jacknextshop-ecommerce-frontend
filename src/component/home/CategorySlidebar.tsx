@@ -21,6 +21,7 @@ type Category = {
       }else{
         params.set("categoryId", String(id));
       }
+      params.set("page", "1");
       navigate(`?${params.toString()}`);
     }
     useEffect(() => {
