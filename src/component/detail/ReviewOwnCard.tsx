@@ -1,29 +1,68 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { StarIcon, HeartIcon } from "@heroicons/react/24/solid";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import { API_BASE } from "../../constants/api";
 
 type Review = {
   rating: number;
   comment: string;
   like: boolean;
-  fname: string;
+  userFname: string;
 };
 
 type Props = {
-  review: Review;
+  review: Review | null;
   onSubmit?: (updatedReview: Review) => void;
 };
 
 const ReviewOwnCard = ({ review, onSubmit }: Props) => {
-  const [rating, setRating] = useState(review.rating);
-  const [comment, setComment] = useState(review.comment);
-  const [like, setLike] = useState(review.like);
+  const { productId: id } = useParams(); 
+  const [rating, setRating] = useState(0);
+  const [userFname, setUserFname] = useState("");
+  const [comment, setComment] = useState("");
+  const [like, setLike] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
-  const handleSubmit = () => {
-    const updatedReview = { ...review, rating, comment, like };
-    console.log("Updated Review:", updatedReview);
-    onSubmit?.(updatedReview);
-    setIsEditing(false); // กลับสู่โหมดแสดง
+  useEffect(() => {
+    if (review) {
+      setRating(review.rating);
+      setComment(review.comment);
+      setLike(review.like);
+      setUserFname(review.userFname);
+    }
+  }, [review]);
+
+  const handleSubmit = async () => {
+    const payload = {
+      rating,
+      comment,
+      like,
+    };
+
+    try {
+      let updatedReview: Review;
+
+      if (!review) {
+        const res = await axios.post(`${API_BASE}/api/review/${id}`, payload, {
+          withCredentials: true,
+        });
+        updatedReview = res.data; 
+      } else {
+
+        await axios.put(`${API_BASE}/api/review/${id}`, payload, {
+          withCredentials: true,
+        });
+        updatedReview = { ...payload, userFname: review.userFname };
+      }
+
+      setIsEditing(false);
+      setUserFname(updatedReview.userFname); 
+      onSubmit?.(updatedReview);
+      window.location.reload();
+    } catch (error) {
+      console.error("Review submit error:", error);
+    }
   };
 
   const renderStars = () => {
@@ -54,11 +93,15 @@ const ReviewOwnCard = ({ review, onSubmit }: Props) => {
           placeholder="พิมพ์รีวิวของคุณ..."
         />
       ) : (
-        <p className="text-gray-700 text-base leading-relaxed mb-6">{comment}</p>
+        <p className="text-gray-700 text-base leading-relaxed mb-6">
+          {comment}
+        </p>
       )}
 
       <div className="flex items-center justify-between mb-6">
-        <p className="text-sm text-gray-500">โดย: {review.fname}</p>
+        <p className="text-sm text-gray-500">
+          โดย: {userFname || "ไม่ระบุชื่อ"}
+        </p>
         <HeartIcon
           className={`h-6 w-6 transition ${
             like ? "text-pink-500" : "text-gray-800"

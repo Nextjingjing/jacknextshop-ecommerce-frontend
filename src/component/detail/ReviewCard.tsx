@@ -5,7 +5,7 @@ type Review = {
   rating: number;
   comment: string;
   like: boolean;
-  fname: string;
+  userFname: string;
 };
 
 type ReviewProps = {
@@ -40,7 +40,7 @@ const ReviewCard = ({ review }: ReviewProps) => {
         </div>
       )}
 
-      <p className="text-xs text-gray-500 mt-3">- {review.fname}</p>
+      <p className="text-xs text-gray-500 mt-3">- {review.userFname}</p>
     </div>
   );
 };

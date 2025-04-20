@@ -6,7 +6,7 @@ import ReviewTab from '../component/detail/ReviewTab'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { API_BASE } from '../constants/api'
-import { useParams } from 'react-router-dom'
+import { useParams, useSearchParams } from 'react-router-dom'
 
 type Product = {
     productId: number;
@@ -37,6 +37,9 @@ type ReviewResponse = {
   
 function Detail() {
     const { productId: id } = useParams();
+    const [searchParams] = useSearchParams();
+    const page = searchParams.get("page") || "1";
+    const currentPage = parseInt(page, 10);
     const [product, setProduct] = useState<Product>();
     const [reviews, setReviews] = useState<ReviewResponse>();
     useEffect(() => {
@@ -58,7 +61,7 @@ function Detail() {
         }
         const fetchReview = async () => {
             try {
-                const response = await axios.get(`${API_BASE}/api/review/${id}`);
+                const response = await axios.get(`${API_BASE}/api/review/${id}?size=5&page=${currentPage-1}`);
                 const {data, totalPages, totalElements, page, rating, size} = response.data;
                 setReviews({
                     data,
@@ -74,7 +77,7 @@ function Detail() {
         }
         fetchProduct();
         fetchReview();
-    },[])
+    },[page])
 
     return (
         <div>
@@ -98,7 +101,9 @@ function Detail() {
                 </div>
             </div>
             {/* Review */}
-            <ReviewTab totalPages={reviews ? reviews.totalPages: 1}/>
+            <div>
+                <ReviewTab totalPages={reviews ? reviews.totalPages: 1} data={reviews? reviews.data : []}/>
+            </div>
         </div>
     )
 }
