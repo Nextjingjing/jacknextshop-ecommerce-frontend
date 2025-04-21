@@ -89,8 +89,10 @@ export const Auth = () => {
     return user.isLogin ? (
         <AlreadyLogin />
     ) : (
-        <button className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-blue-600" onClick={handleLogin}>
-            Sign In / Sign Up
+        <button className="bg-gray-500 text-white text-sm px-3 py-1.5 sm:text-base sm:px-4 sm:py-2 rounded hover:bg-blue-600" 
+        onClick={handleLogin}
+        >
+            Sign In/Up
         </button>
     );
 }
