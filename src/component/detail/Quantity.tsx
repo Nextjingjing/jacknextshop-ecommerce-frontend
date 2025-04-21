@@ -24,7 +24,7 @@ const Quantity: React.FC<ComponentProp> = ({ product_stock }) => {
     return (
         <div>
             <div className='mt-4'>
-                <div className='mb-2 font-bold'>จำนวนสินค้า</div>
+                <div className='mb-2 font-bold'>จำนวนสินค้า: {product_stock}</div>
                 <div className='flex border-[1px] border-black w-fit rounded-md'>
                     <span
                         onClick={handleDecreaseQuantity}

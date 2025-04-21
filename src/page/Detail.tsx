@@ -81,7 +81,7 @@ function Detail() {
 
     return (
         <div>
-            <div className='w-[1080px] container mx-auto mt-6'>
+            <div className='max-w-[1080px] w-full container mx-auto mt-6 px-4'>
                 <div className='bg-white px-4 py-4 rounded-xl relative border-2 border-[#261FB3]'>
                     <div className='flex flex-row gap-6'>
                         <Image product_image={product ? product.image : "https://cdn.pixabay.com/photo/2015/06/09/16/12/error-803716_1280.png"} />
@@ -89,14 +89,9 @@ function Detail() {
                         product_name={product ? product.name : "error"}
                         product_price={product ? product.price : 99999999}
                         product_detail={product ? product.description : "error"}
-                        product_rating={reviews ? reviews.rating : 0} 
+                        product_stock={product? product.stock: 0}
+                        product_rating={reviews ? reviews.rating : 0}
                         reviewer_count={reviews ? reviews.totalElements : 0} />
-                    </div>
-                    <div className='absolute bottom-[75px] left-[341px]'>
-                        <Quantity product_stock={product ? product.stock : 99999999} />
-                    </div>
-                    <div className='absolute bottom-[15px] left-[341px]'>
-                        <BuyAndAddCartButton />
                     </div>
                 </div>
             </div>
