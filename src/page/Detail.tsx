@@ -1,7 +1,5 @@
 import Image from '../component/detail/Image'
 import Details from '../component/detail/Details'
-import Quantity from '../component/detail/Quantity'
-import BuyAndAddCartButton from '../component/detail/BuyAndAddCartButton'
 import ReviewTab from '../component/detail/ReviewTab'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
