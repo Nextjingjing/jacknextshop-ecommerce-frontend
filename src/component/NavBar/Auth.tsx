@@ -9,7 +9,7 @@ import { RootState } from '../../store/store';
 import { API_BASE } from '../../constants/api';
 import axios from 'axios';
 import { resetUser } from '../../slice/userSlice';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
@@ -22,6 +22,7 @@ const handleLogin = () => {
 const AlreadyLogin = () => {
     const dispatch = useDispatch();
     const { image } = useSelector((state: RootState) => state.user);
+    const navigate = useNavigate();
 
     const logout = async () => {
         try {
@@ -29,6 +30,7 @@ const AlreadyLogin = () => {
                 withCredentials: true,
             });
             dispatch(resetUser());
+            navigate("/");
         } catch (error: unknown) {
             if (axios.isAxiosError(error)) {
                 if (error.response?.status === 401) {
