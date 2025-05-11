@@ -5,13 +5,12 @@ import { useNavigate, useLocation } from 'react-router-dom'
 const CartBtn = () => {
     const navigate = useNavigate()
     const location = useLocation()
-    const userId = useSelector((state: any) => state.user.user_id)
 
     const handleClick = () => {
-        navigate(`/cart/${userId}`)
+        navigate(`/cart`)
     }
 
-    const isActive = location.pathname === `/cart/${userId}`
+    const isActive = location.pathname === `/cart`
 
     return (
         <button

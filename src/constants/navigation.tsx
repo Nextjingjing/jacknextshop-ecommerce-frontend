@@ -8,8 +8,8 @@ import Profile from "../page/Profile";
 const navigationForRouter = [
   { name: "หน้าแรก", href: "/", element: <Home /> },
   { name: "เกี่ยวกับเรา", href: "/about", element: <About /> },
-  { name: "ตระกร้า", href: "/cart/:userId", element: <Cart /> },
-  { name: "แจ้งเตือน", href: "/notification/:userId", element: <Notification /> },
+  { name: "ตระกร้า", href: "/cart", element: <Cart /> },
+  { name: "แจ้งเตือน", href: "/notification", element: <Notification /> },
   { name: "รายละเอียดสินค้า", href: "/product/:productId", element: <Detail /> },
   { name: "โปรไฟล์", href: "/profile", element: <Profile /> },
 ];

@@ -1,17 +1,15 @@
 import { BellIcon } from '@heroicons/react/16/solid'
-import { useSelector } from 'react-redux'
 import { useNavigate, useLocation } from 'react-router-dom'
 
 const NotificationBtn = () => {
     const navigate = useNavigate()
     const location = useLocation()
-    const userId = useSelector((state: any) => state.user.user_id)
 
     const handleClick = () => {
-        navigate(`/notification/${userId}`)
+        navigate(`/notification`)
     }
 
-    const isActive = location.pathname === `/notification/${userId}`
+    const isActive = location.pathname === `/notification`
 
     return (
         <button

@@ -84,6 +84,7 @@ function Detail() {
                     <div className='flex flex-row gap-6'>
                         <Image product_image={product ? product.image : "https://cdn.pixabay.com/photo/2015/06/09/16/12/error-803716_1280.png"} />
                         <Details 
+                        product_id={product ? product.productId : 0}
                         product_name={product ? product.name : "error"}
                         product_price={product ? product.price : 99999999}
                         product_detail={product ? product.description : "error"}

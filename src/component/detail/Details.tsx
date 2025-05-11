@@ -9,10 +9,12 @@ interface ComponentProps {
     product_detail: string,
     product_rating: number,
     reviewer_count: number,
+    product_id: number,
     product_stock: number
 }
 
 const Details: React.FC<ComponentProps> = ({
+    product_id,
     product_name,
     product_price,
     product_detail,
@@ -41,7 +43,7 @@ const Details: React.FC<ComponentProps> = ({
             <p className="text-sm sm:text-base">รายละเอียดสินค้า: {product_detail}</p>
             <div className='mt-6 flex flex-col items-center gap-4'>
                 <Quantity product_stock={product_stock} />
-                <BuyAndAddCartButton />
+                <BuyAndAddCartButton productId={product_id}/>
             </div>
 
 
