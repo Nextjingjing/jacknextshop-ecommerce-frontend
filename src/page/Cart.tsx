@@ -1,30 +1,15 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { API_BASE } from "../constants/api";
+import { useEffect } from "react";
+import type { RootState, AppDispatch } from "../store/store";
+import { fetchCart } from "../slice/cartSlice";
 import CartCard from "../component/cart/CartCard";
-
-type Product = {
-    productId: number;
-    name: string;
-    price: number;
-    image: string;
-    amount: number;
-};
+import { useDispatch, useSelector } from "react-redux";
 
 const Cart = () => {
-    const [products, setProducts] = useState<Product[] | null>(null)
+    const dispatch = useDispatch<AppDispatch>();
+    const { items } = useSelector((s: RootState) => s.cart);
     useEffect(() => {
-        const fetchProducts = async () => {
-            try {
-                const response = await axios.get(`${API_BASE}/api/cart`, { withCredentials: true })
-                setProducts(response.data.products);
-            } catch (error) {
-                console.log("error: ", error)
-            }
-        }
-        fetchProducts();
-    },
-        [])
+    dispatch(fetchCart());
+  }, [dispatch])
     return (
         <div className="flex flex-col md:flex-row min-h-fit bg-gray-100">
             {/* Sidebar - Cart Items */}
@@ -32,9 +17,9 @@ const Cart = () => {
                 <h2 className="text-xl font-bold mb-4">Cart Items</h2>
                 {/* Placeholder for cart items */}
                 <div className="min-h-fit flex flex-col gap-4 text-gray-500">
-                    {products ? products.map((p) => (
+                    {items ? items.map((p) => (
                         <CartCard key={p.productId} product={p} />
-                    )) : <h2>No Product</h2>}
+                    )) : <h2>...</h2>}
                 </div>
             </section>
 
