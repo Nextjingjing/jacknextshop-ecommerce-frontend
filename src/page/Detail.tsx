@@ -83,7 +83,7 @@ function Detail() {
                 <div className='bg-white px-4 py-4 rounded-xl relative border-2 border-[#261FB3]'>
                     <div className='flex flex-row gap-6'>
                         <Image product_image={product ? product.image : "https://cdn.pixabay.com/photo/2015/06/09/16/12/error-803716_1280.png"} />
-                        <Details 
+                        <Details
                         product_id={product ? product.productId : 0}
                         product_name={product ? product.name : "error"}
                         product_price={product ? product.price : 99999999}

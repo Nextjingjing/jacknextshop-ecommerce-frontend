@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { PencilSquareIcon, TrashIcon } from '@heroicons/react/24/solid';
 import axios from "axios";
 import { API_BASE } from "../../constants/api";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../store/store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../store/store";
 import { setItems } from "../../slice/cartSlice";
 
 
@@ -24,6 +24,7 @@ const CartCard: React.FC<CartCardProps> = ({ product }) => {
   const dispatch = useDispatch<AppDispatch>();
   const [isLocked, setIsLocked] = useState(true);
   const [value, setValue] = useState(product.amount);
+  const { items } = useSelector((s: RootState) => s.cart);
 
   const handleLock = async () => {
     if (isLocked) {
@@ -55,7 +56,9 @@ const CartCard: React.FC<CartCardProps> = ({ product }) => {
         );
         dispatch(setItems(res.data.products));
     } catch (error) {
-      console.log(error)
+      if(items.length == 1) {
+        dispatch(setItems([]));
+      }
     }
   }
 

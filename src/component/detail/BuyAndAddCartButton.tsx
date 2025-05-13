@@ -1,11 +1,21 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMoneyBill, faCartShopping } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
+import { API_BASE } from '../../constants/api';
 
 interface BuyAndAddCartButtonProps {
   productId: number;
 }
 
 const BuyAndAddCartButton = ({ productId }: BuyAndAddCartButtonProps) => {
+  const handleAddCart = async () => {
+    try {
+      const res = await axios.post(`${API_BASE}/api/cart/${productId}/1`, {}, {withCredentials: true})
+      console.log(res.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
   return (
     <div>
       <div className='flex gap-2 mt-8'>
@@ -16,6 +26,7 @@ const BuyAndAddCartButton = ({ productId }: BuyAndAddCartButtonProps) => {
           ซื้อ
         </button>
         <button
+          onClick={handleAddCart}
           className='px-3 py-1 bg-[#261FB3] text-white rounded-md w-[112px] cursor-pointer'
         >
           <FontAwesomeIcon icon={faCartShopping} className='mr-2'/>

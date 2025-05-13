@@ -1,5 +1,4 @@
 import { ShoppingCartIcon } from '@heroicons/react/24/solid'
-import { useSelector } from 'react-redux'
 import { useNavigate, useLocation } from 'react-router-dom'
 
 const CartBtn = () => {
