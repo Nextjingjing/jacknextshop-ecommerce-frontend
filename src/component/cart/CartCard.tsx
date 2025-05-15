@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { PencilSquareIcon, TrashIcon } from '@heroicons/react/24/solid';
 import axios from "axios";
 import { API_BASE } from "../../constants/api";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../store/store";
+import { useDispatch } from "react-redux";
+import { AppDispatch} from "../../store/store";
 import { setItems } from "../../slice/cartSlice";
 
 
@@ -24,7 +24,6 @@ const CartCard: React.FC<CartCardProps> = ({ product }) => {
   const dispatch = useDispatch<AppDispatch>();
   const [isLocked, setIsLocked] = useState(true);
   const [value, setValue] = useState(product.amount);
-  const { items } = useSelector((s: RootState) => s.cart);
 
   const handleLock = async () => {
     if (isLocked) {
@@ -49,15 +48,21 @@ const CartCard: React.FC<CartCardProps> = ({ product }) => {
   const handleDelete = async () => {
     try {
       const res = await axios.delete(
-          `${API_BASE}/api/cart/${product.productId}`,
-          {
-            withCredentials: true,
-          }
-        );
-        dispatch(setItems(res.data.products));
+        `${API_BASE}/api/cart/${product.productId}`,
+        {
+          withCredentials: true,
+        }
+      );
+      dispatch(setItems(res.data.products));
     } catch (error) {
-      if(items.length == 1) {
-        dispatch(setItems([]));
+      if (axios.isAxiosError(error)) {
+        if (error.response?.status === 404) {
+          dispatch(setItems([]));
+        } else {
+          console.error('Unexpected Axios error:', error);
+        }
+      } else {
+        console.error('Unknown error:', error);
       }
     }
   }

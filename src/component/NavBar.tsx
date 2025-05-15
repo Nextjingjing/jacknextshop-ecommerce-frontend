@@ -19,6 +19,7 @@ import { useEffect } from 'react'
 import axios from 'axios'
 import { API_BASE } from '../constants/api'
 import { setUser } from '../slice/userSlice'
+import { AppDispatch } from '../store/store'
 
 
 function classNames(...classes: string[]) {
@@ -26,7 +27,7 @@ function classNames(...classes: string[]) {
 }
 
 const NavBar = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const location = useLocation();
 
   useEffect(() => {
