@@ -5,6 +5,8 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { API_BASE } from '../constants/api'
 import { useParams, useSearchParams } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { reset } from '../slice/amountSlice'
 
 type Product = {
     productId: number;
@@ -35,6 +37,7 @@ type ReviewResponse = {
   
 function Detail() {
     const { productId: id } = useParams();
+    const dispatch = useDispatch();
     const [searchParams] = useSearchParams();
     const page = searchParams.get("page") || "1";
     const currentPage = parseInt(page, 10);
@@ -75,7 +78,8 @@ function Detail() {
         }
         fetchProduct();
         fetchReview();
-    },[page])
+        dispatch(reset())
+    },[page, dispatch])
 
     return (
         <div>

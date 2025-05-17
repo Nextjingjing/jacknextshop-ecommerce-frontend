@@ -2,8 +2,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMoneyBill, faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import { API_BASE } from '../../constants/api';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../store/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../../store/store';
 import { setItems } from '../../slice/cartSlice';
 
 interface BuyAndAddCartButtonProps {
@@ -11,10 +11,11 @@ interface BuyAndAddCartButtonProps {
 }
 
 const BuyAndAddCartButton = ({ productId }: BuyAndAddCartButtonProps) => {
+  const quantity = useSelector((state: RootState) => state.amount.quantity)
   const dispatch = useDispatch<AppDispatch>();
   const handleAddCart = async () => {
     try {
-      const res = await axios.post(`${API_BASE}/api/cart/${productId}/1`, {}, {withCredentials: true})
+      const res = await axios.post(`${API_BASE}/api/cart/${productId}/${quantity}`, {}, {withCredentials: true})
       dispatch(setItems(res.data.products))
     } catch (error) {
       console.log(error)

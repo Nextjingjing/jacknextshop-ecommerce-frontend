@@ -1,15 +1,28 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import type { RootState, AppDispatch } from "../store/store";
 import { fetchCart } from "../slice/cartSlice";
 import CartCard from "../component/cart/CartCard";
 import { useDispatch, useSelector } from "react-redux";
 
 const Cart = () => {
+    const [summary, setSummary] = useState(0);
     const dispatch = useDispatch<AppDispatch>();
     const { items } = useSelector((s: RootState) => s.cart);
     useEffect(() => {
     dispatch(fetchCart());
   }, [dispatch])
+
+    useEffect(() => {
+    setSummary(handleSummary());
+  }, [items])
+
+    const handleSummary = () => {
+        let sum = 0;
+        for(const i of items) {
+            sum += i.amount * i.price;
+        }
+        return sum;
+    }
     return (
         <div className="flex flex-col md:flex-row min-h-fit bg-gray-100">
             {/* Sidebar - Cart Items */}
@@ -28,7 +41,7 @@ const Cart = () => {
                 <h2 className="text-xl font-bold mb-4">Order Summary</h2>
                 {/* Placeholder for summary content */}
                 <div className="h-64 bg-gray-100 rounded flex items-center justify-center text-gray-500">
-                    Summary goes here
+                    <h2 className="text-ml font-bold mb-4">ยอดรวม: {summary} ฿</h2>
                 </div>
             </aside>
         </div>

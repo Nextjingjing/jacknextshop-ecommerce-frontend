@@ -10,6 +10,7 @@ import { API_BASE } from '../../constants/api';
 import axios from 'axios';
 import { resetUser } from '../../slice/userSlice';
 import { Link, useNavigate } from 'react-router-dom';
+import { clearItems } from '../../slice/cartSlice';
 
 function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
@@ -30,6 +31,7 @@ const AlreadyLogin = () => {
                 withCredentials: true,
             });
             dispatch(resetUser());
+            dispatch(clearItems());
             navigate("/");
         } catch (error: unknown) {
             if (axios.isAxiosError(error)) {

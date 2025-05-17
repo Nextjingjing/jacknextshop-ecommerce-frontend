@@ -4,7 +4,7 @@ import axios from "axios";
 import { API_BASE } from "../../constants/api";
 import { useDispatch } from "react-redux";
 import { AppDispatch} from "../../store/store";
-import { setItems } from "../../slice/cartSlice";
+import { clearItems, setItems } from "../../slice/cartSlice";
 
 
 type Product = {
@@ -57,7 +57,7 @@ const CartCard: React.FC<CartCardProps> = ({ product }) => {
     } catch (error) {
       if (axios.isAxiosError(error)) {
         if (error.response?.status === 404) {
-          dispatch(setItems([]));
+          dispatch(clearItems());
         } else {
           console.error('Unexpected Axios error:', error);
         }

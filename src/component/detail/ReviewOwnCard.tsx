@@ -33,6 +33,20 @@ const ReviewOwnCard = ({ review, onSubmit }: Props) => {
     }
   }, [review]);
 
+  const handleDelete = async () => {
+    try {
+      await axios.delete(`${API_BASE}/api/review/${id}`, {
+        withCredentials: true,
+      });
+      setRating(0);
+      setComment("");
+      setLike(false);
+      window.location.reload();
+    } catch (error) {
+      console.error("Review delete error:", error);
+    }
+  };
+
   const handleSubmit = async () => {
     const payload = {
       rating,
@@ -47,9 +61,8 @@ const ReviewOwnCard = ({ review, onSubmit }: Props) => {
         const res = await axios.post(`${API_BASE}/api/review/${id}`, payload, {
           withCredentials: true,
         });
-        updatedReview = res.data; 
+        updatedReview = res.data;
       } else {
-
         await axios.put(`${API_BASE}/api/review/${id}`, payload, {
           withCredentials: true,
         });
@@ -57,7 +70,7 @@ const ReviewOwnCard = ({ review, onSubmit }: Props) => {
       }
 
       setIsEditing(false);
-      setUserFname(updatedReview.userFname); 
+      setUserFname(updatedReview.userFname);
       onSubmit?.(updatedReview);
       window.location.reload();
     } catch (error) {
@@ -93,15 +106,11 @@ const ReviewOwnCard = ({ review, onSubmit }: Props) => {
           placeholder="พิมพ์รีวิวของคุณ..."
         />
       ) : (
-        <p className="text-gray-700 text-base leading-relaxed mb-6">
-          {comment}
-        </p>
+        <p className="text-gray-700 text-base leading-relaxed mb-6">{comment}</p>
       )}
 
       <div className="flex items-center justify-between mb-6">
-        <p className="text-sm text-gray-500">
-          โดย: {userFname || "ไม่ระบุชื่อ"}
-        </p>
+        <p className="text-sm text-gray-500">โดย: {userFname || "ไม่ระบุชื่อ"}</p>
         <HeartIcon
           className={`h-6 w-6 transition ${
             like ? "text-pink-500" : "text-gray-800"
@@ -110,7 +119,7 @@ const ReviewOwnCard = ({ review, onSubmit }: Props) => {
         />
       </div>
 
-      <div className="text-right">
+      <div className="text-right space-x-3">
         {isEditing ? (
           <button
             onClick={handleSubmit}
@@ -126,6 +135,12 @@ const ReviewOwnCard = ({ review, onSubmit }: Props) => {
             แก้ไขรีวิว
           </button>
         )}
+        <button
+          onClick={handleDelete}
+          className="px-6 py-2 bg-red-800 text-white rounded-lg hover:bg-red-600 transition"
+        >
+          ลบรีวิว
+        </button>
       </div>
     </div>
   );

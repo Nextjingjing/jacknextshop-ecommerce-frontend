@@ -20,6 +20,7 @@ import axios from 'axios'
 import { API_BASE } from '../constants/api'
 import { setUser } from '../slice/userSlice'
 import { AppDispatch } from '../store/store'
+import { fetchCart } from '../slice/cartSlice'
 
 
 function classNames(...classes: string[]) {
@@ -52,6 +53,7 @@ const NavBar = () => {
     };
   
     fetchUser();
+    dispatch(fetchCart());
   }, [dispatch]);
 
   return (
